@@ -1,4 +1,4 @@
-.drone.ymlpipeline:
+pipeline:
     build:
         image: ubuntu:latest # Should be fine for most projects, alternatively use any other image from Docker Hub: https://hub.docker.com
         commands: 
