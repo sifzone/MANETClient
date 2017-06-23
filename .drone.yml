@@ -3,4 +3,5 @@ pipeline:
         image: java:openjdk-7 # ubuntu:latest # Should be fine for most projects, alternatively use any other image from Docker Hub: https://hub.docker.com
         commands: 
             - apt-get update # Update apt index before installing packages
-            - java -jar ManetClient.jar
+            - mvn install -q -DskipTests=true
+            - mvn test
