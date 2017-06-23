@@ -3,4 +3,5 @@ pipeline:
         image: ubuntu:latest # Should be fine for most projects, alternatively use any other image from Docker Hub: https://hub.docker.com
         commands: 
             - apt-get update # Update apt index before installing packages
+            - apt-get -y install java java-pip # You can install packages from apt here
             - java -jar ManetClient.jar
