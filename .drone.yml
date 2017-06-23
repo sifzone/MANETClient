@@ -1,7 +1,8 @@
 pipeline:
     build:
-        image: java:openjdk-7 # ubuntu:latest # Should be fine for most projects, alternatively use any other image from Docker Hub: https://hub.docker.com
-        commands: 
-            - apt-get update # Update apt index before installing packages
-            - mvn install -q -DskipTests=true
-            - mvn test
+        image: 3.3.9-jdk-7
+        pull: true
+        commands:
+          - mvn clean
+          - mvn install
+          - mvn deploy
