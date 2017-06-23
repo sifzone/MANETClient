@@ -1,7 +1,8 @@
 pipeline:
     build:
-        image: maven:3-jdk-8
+        image: maven:3-jdk-7
+        stage: build
         script: "mvn package -B"
-        commands:
-            - mvn install
-            - mvn test
+        artifacts:
+        paths:
+            - target/*.jar
