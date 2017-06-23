@@ -3,5 +3,5 @@ pipeline:
         image: maven:3-jdk-8
         script: "mvn package -B"
         command:
-        - mvn install
-        - mvn test
+            - mvn install
+            - mvn test
