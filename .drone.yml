@@ -1,6 +1,6 @@
 pipeline:
     build:
-        image: 3.3.9-jdk-7
+        image: OpenJDK 7
         pull: true
         commands:
           - mvn clean
