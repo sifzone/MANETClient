@@ -1,6 +1,7 @@
 pipeline:
     build:
         image: java:openjdk-7
+        script: "mvn install -B"
         pull: true
         commands:
           - mvn clean
