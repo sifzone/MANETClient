@@ -4,6 +4,6 @@ pipeline:
         script: "mvn package"
         pull: true
         commands:
-          -mvn clean
-          -mvn install
-          -mvn deploy
+          - mvn clean
+          - mvn install
+          - mvn deploy
