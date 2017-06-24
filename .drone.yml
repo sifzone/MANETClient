@@ -3,7 +3,7 @@ pipeline:
         image: maven:3-jdk-7
         stage: build
         script: "mvn package -B"
-        goal: clean install test
+        goals: clean install test
         artifacts:
             paths:
                 - target/*.jar
