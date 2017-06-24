@@ -9,6 +9,27 @@
 
   <name>ManetClient</name>
   <url>http://maven.apache.org</url>
+  
+  <build>
+  	<plugins>
+  		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>exec-maven-plugin</artifactId>
+			<version>1.2.1</version>
+			<executions>
+				<execution>
+					<phase>test</phase>
+					<goals>
+						<goal>java</goal>
+					</goals>
+				</execution>
+			</executions>
+			<configuration>
+				<mainClass>uni.bonn.moco.ss17.ManetClient.App</mainClass>				
+			</configuration>
+		</plugin>
+  	</plugins>
+  </build>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
