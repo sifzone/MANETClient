@@ -1,21 +1,16 @@
 pipeline:
     build:
         image: maven:3.3.3-jdk-8-onbuild
-        stage:
-            - build
-            - deploy
-            
-        ManetClient-Build:
-            pull: true
-            stage: build
-            script: "mvn package -B"
-            artifacts:
-                paths:
-                    - ManetClient/
-            commands:
-                - cd ManetClient/
-                - mvn install -q -DskipTests=true
-                - mvn test
+        pull: true
+        stage: build
+        script: "mvn package -B"
+        artifacts:
+            paths:
+                - ManetClient/
+        commands:
+            - cd ManetClient/
+            - mvn install -q -DskipTests=true
+            - mvn test
                 
-        ManetClient-Deploy:
-            stage: deploy
+        
+        
