@@ -7,5 +7,6 @@ pipeline:
             paths:
                 - ManetClient/
         commands:
+            - cd ManetClient/
             - mvn install -q -DskipTests=true
             - mvn test
