@@ -3,28 +3,34 @@ package uni.bonn.moco.ss17.Adhoc.Model;
 public class AdjacentNode {
 
 	private String neighborName;
-	private long weight;	
-	
+	private long weight;
+
 	public AdjacentNode() {
 		super();
 	}
+
 	public AdjacentNode(String neighborName, long weight) {
 		super();
 		this.neighborName = neighborName;
 		this.weight = weight;
 	}
+
 	public String getNeighborName() {
 		return neighborName;
 	}
+
 	public void setNeighborName(String neighborName) {
 		this.neighborName = neighborName;
 	}
+
 	public long getWeight() {
 		return weight;
 	}
+
 	public void setWeight(long weight) {
 		this.weight = weight;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -33,6 +39,7 @@ public class AdjacentNode {
 		result = prime * result + (int) (weight ^ (weight >>> 32));
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -51,9 +58,10 @@ public class AdjacentNode {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "AdjacentNode [neighborName=" + neighborName + ", weight=" + weight + "]";
 	}
-	
+
 }

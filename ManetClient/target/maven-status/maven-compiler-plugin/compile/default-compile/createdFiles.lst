@@ -1,8 +1,4 @@
-uni\bonn\moco\ss17\ManetClient\DijkstraRoutingAlgorithm.class
-uni\bonn\moco\ss17\Adhoc\Model\TopologyMessage.class
-uni\bonn\moco\ss17\Adhoc\Model\DataMessage.class
 uni\bonn\moco\ss17\Adhoc\Model\WelcomeMessage.class
 uni\bonn\moco\ss17\Adhoc\Model\AdjacentNode.class
 uni\bonn\moco\ss17\Adhoc\Model\HelloMessage.class
-uni\bonn\moco\ss17\ManetClient\DijkstraRoutingAlgorithm$Node.class
-uni\bonn\moco\ss17\ManetClient\ManetNode.class
+uni\bonn\moco\ss17\ManetClient\App.class
