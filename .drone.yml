@@ -1,12 +1,11 @@
 pipeline:
     build:
-        image: ubuntu:latest
+        image: maven:3.3.3-jdk-8-onbuild
         stage:
             - build
             - deploy
             
         ManetClient-Build:
-            image: maven:3.3.3-jdk-8-onbuild
             pull: true
             stage: build
             script: "mvn package -B"
