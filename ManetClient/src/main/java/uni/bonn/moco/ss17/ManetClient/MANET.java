@@ -81,20 +81,20 @@ public class MANET {
 			jsonObj = (JSONObject) obj;
 
 			if (jsonObj.containsKey("type")) {
+
 				String type = (String) jsonObj.get("type");
-				switch (type) {
-				case "welcome":
+				if (type.compareTo("welcome") == 0) {
+
 					messageType = MESSAGE_TYPE.WELCOME;
-					break;
-				case "hello":
+				}
+				else if(type.compareTo("hello") == 0) {
 					messageType = MESSAGE_TYPE.HELLO;
-					break;
-				case "topology":
+				}
+				else if(type.compareTo("topology") == 0){
 					messageType = MESSAGE_TYPE.TOPOLOGY;
-					break;
-				case "data":
+				}
+				else if(type.compareTo("data") == 0){
 					messageType = MESSAGE_TYPE.DATA;
-					break;
 				}
 
 				messageProcessing();
@@ -116,19 +116,18 @@ public class MANET {
 					if (jsonObj.containsKey("type")) {
 
 						String type = (String) jsonObj.get("type");
-						switch (type) {
-						case "welcome":
+						if (type.compareTo("welcome") == 0) {
+
 							messageType = MESSAGE_TYPE.WELCOME;
-							break;
-						case "hello":
+						}
+						else if(type.compareTo("hello") == 0) {
 							messageType = MESSAGE_TYPE.HELLO;
-							break;
-						case "topology":
+						}
+						else if(type.compareTo("topology") == 0){
 							messageType = MESSAGE_TYPE.TOPOLOGY;
-							break;
-						case "data":
+						}
+						else if(type.compareTo("data") == 0){
 							messageType = MESSAGE_TYPE.DATA;
-							break;
 						}
 					}
 
@@ -157,7 +156,7 @@ public class MANET {
 			/**
 			 * HELLO MESSAGE @every 2 seconds
 			 */
-			HelloMessage helloMessage = new HelloMessage();
+			final HelloMessage helloMessage = new HelloMessage();
 
 			helloMessage.setSender(thisNode.getId());
 			helloMessage.setType("hello");
@@ -180,7 +179,7 @@ public class MANET {
 			/**
 			 * TOPOLOGY MESSAGE @every 5 seconds
 			 */
-			TopologyMessage topologyMessage = new TopologyMessage();
+			final TopologyMessage topologyMessage = new TopologyMessage();
 
 			thisNode.setSequence(thisNode.getSequence() + 1);
 			topologyMessage.setSender(thisNode.getId());
