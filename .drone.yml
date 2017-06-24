@@ -2,6 +2,7 @@ pipeline:
     build:
         image: maven:3.3.3-jdk-8-onbuild
         pull: true
+        stage: build
         script: "mvn package -B"
         artifacts:
             paths:
@@ -10,3 +11,6 @@ pipeline:
             - cd ManetClient/
             - mvn install -q -DskipTests=true
             - mvn test
+                
+        
+        
