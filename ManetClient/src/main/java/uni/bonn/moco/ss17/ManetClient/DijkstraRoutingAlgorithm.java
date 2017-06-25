@@ -14,7 +14,7 @@ import uni.bonn.moco.ss17.Adhoc.Model.AdjacentNode;
 public class DijkstraRoutingAlgorithm {
 
 	private ConcurrentHashMap<String, Node> routingTable;
-	private Map<String, String> nextHopTable;
+	private ConcurrentHashMap<String, String> nextHopTable;
 	private String source;
 	private List<String> otherNodes;
 
@@ -116,13 +116,13 @@ public class DijkstraRoutingAlgorithm {
 
 		this.source = source;
 		this.routingTable = new ConcurrentHashMap<String, Node>();
-		this.nextHopTable = new HashMap<String, String>();
+		this.nextHopTable = new ConcurrentHashMap<String, String>();
 		List<Node> visited = new ArrayList<Node>();
 		List<Node> unvisited = new ArrayList<Node>();
 		List<Node> nextNeighbors = new ArrayList<Node>();
 		otherNodes = new ArrayList<String>();
 
-		System.out.println("\n\nDijkstra Routing Algorithm in process....\n\n");
+		//System.out.println("\n\nDijkstra Routing Algorithm in process....\n\n");
 
 		/**
 		 * Lets distance of start vertex from start vertex = 0 Lets distance of
@@ -134,16 +134,16 @@ public class DijkstraRoutingAlgorithm {
 				node = new Node(source.toString(), new Long(0), null);
 				routingTable.put(source, node);
 				nextNeighbors.add(node);
-				System.out.println("Node[" + source + "]-" + node.toString());
+				//System.out.println("Node[" + source + "]-" + node.toString());
 			} else {
 				node = new Node(key, Long.MAX_VALUE, null);
 				routingTable.put(key, node);
 				otherNodes.add(key);
-				System.out.println("Node[" + key + "]-" + node.toString());
+				//System.out.println("Node[" + key + "]-" + node.toString());
 			}
 			unvisited.add(node);
 		}
-		System.out.println("");
+		//System.out.println("");
 
 		/**
 		 * Loop Visit the unvisted vertex with the smallest known distance from
@@ -160,16 +160,16 @@ public class DijkstraRoutingAlgorithm {
 
 			// FIND UNVISITED NODE WITH SMALLEST DISTANCE FROM START VERTEX
 			// --------------------------------------------
-			System.out.println("Size of nextNeighbors: " + nextNeighbors.size());
+			//System.out.println("Size of nextNeighbors: " + nextNeighbors.size());
 
 			Collections.sort(nextNeighbors);
 			currentNode = nextNeighbors.get(0);
 			nextNeighbors.remove(0);
-			System.out.println("Node with minimum distance value : \n\t" + currentNode + "\n");
+			//System.out.println("Node with minimum distance value : \n\t" + currentNode + "\n");
 
 			// DISTANCE BETWEEN CURRENT NODE AND ITS NEIGHBORS and UPDATE
 			// --------------------------------------------
-			System.out.println("Neighbors: ");
+			//System.out.println("Neighbors: ");
 			List<AdjacentNode> neighborsCurrentNode = graph.get(currentNode.getId());
 			for (AdjacentNode currentNeighbor : neighborsCurrentNode) {
 				Node newNode = routingTable.get(currentNeighbor.getNeighborName());
@@ -193,9 +193,9 @@ public class DijkstraRoutingAlgorithm {
 			// UPDATE CURRENT NODE WITH VISITED
 			visited.add(currentNode);
 			unvisited.remove(currentNode);
-			System.out.println("Visited Nodes: " + visited.toString());
-			System.out.println("Unvisited Nodes: " + unvisited.toString());
-			System.out.println("NextNeighbors Nodes: " + nextNeighbors.toString() + "\n");
+			//System.out.println("Visited Nodes: " + visited.toString());
+			//System.out.println("Unvisited Nodes: " + unvisited.toString());
+			//System.out.println("NextNeighbors Nodes: " + nextNeighbors.toString() + "\n");
 		}
 	}
 
@@ -214,7 +214,7 @@ public class DijkstraRoutingAlgorithm {
 		}
 	}
 
-	public Map<String, String> getNext_hop_table() {
+	public ConcurrentHashMap<String, String> getNext_hop_table() {
 		System.out.println("Source:" + this.source);
 
 		String parent;

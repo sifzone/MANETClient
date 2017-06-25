@@ -213,7 +213,9 @@ public class MANET {
 
 					if (!thisNode.getNeighbors().isEmpty()) {
 
-						for (Long key : thisNode.getNeighbors()) {
+//						for (Long key : thisNode.getNeighbors()) {
+						for(Iterator<Long> iter = thisNode.getNeighbors().iterator(); iter.hasNext();){
+							Long key = iter.next();
 							Date neighborTime = thisNode.getNeighborsTimer().get(key);
 							Date currentTime = new Date();
 
@@ -230,7 +232,7 @@ public class MANET {
 			}, 0, (10 * 1000));
 
 			/**
-			 * INSPECTION of TOPOLOGY received of nother nodes @every 10 seconds
+			 * INSPECTION of TOPOLOGY of other nodes @every 10 seconds
 			 */
 			new Timer().schedule(new TimerTask() {
 
@@ -239,7 +241,9 @@ public class MANET {
 
 					if (!thisNode.getTopologyNodes().isEmpty()) {
 
-						for (Long key : thisNode.getTopologyNodes()) {
+//						for (Long key : thisNode.getTopologyNodes()) {
+						for(Iterator<Long> iter = thisNode.getTopologyNodes().iterator(); iter.hasNext();){
+							Long key = iter.next();
 							TopologyMessage tMessage = thisNode.getTopologyOfNodes(key);
 							Date receivedTime = tMessage.getTime();
 							Date currentTime = new Date();
@@ -257,10 +261,29 @@ public class MANET {
 
 		} else if (messageType == MESSAGE_TYPE.HELLO) {
 
+			
 			HelloMessage helloMessage = helloMessageProcessing();
-			synchronized (thisNode) {
-				thisNode.addHelloMessage(helloMessage);
+			
+			if(!thisNode.getNeighbors().contains(helloMessage.getSender())){
+				DataMessage dMessage = new DataMessage();
+				dMessage.setSender(thisNode.getId());
+				dMessage.setType("data");
+				dMessage.setReceiver(helloMessage.getSender());
+				dMessage.setData("Thanks for Joining as a Neighbor");
+				dMessage.setTime(new Date());				
+				dMessage.setNext_hop(helloMessage.getSender());
+				
+				try {
+					System.out.println("SEND: " + dMessage.getJSONFormat().toJSONString());
+					outToServer.writeBytes(dMessage.getJSONFormat().toJSONString());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
+
+			thisNode.addHelloMessage(helloMessage);
+			
+
 		} else if (messageType == MESSAGE_TYPE.TOPOLOGY) {
 
 			TopologyMessage topologyMessage = topologyMessageProcessing();

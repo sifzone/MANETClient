@@ -26,7 +26,7 @@ public class ManetNode {
 
 	private ConcurrentHashMap<Long, List<Long>> adjacentNodes = new ConcurrentHashMap<Long, List<Long>>();
 	private ConcurrentHashMap<String, List<AdjacentNode>> graph = new ConcurrentHashMap<String, List<AdjacentNode>>();
-	private Map<String, String> nextHopTable = new ConcurrentHashMap<String, String>();
+	private ConcurrentHashMap<String, String> nextHopTable = new ConcurrentHashMap<String, String>();
 
 	public ManetNode() {
 		this.sequence = new AtomicLong(0);
@@ -95,7 +95,7 @@ public class ManetNode {
 
 			if (newTMessage.getSequence() > oldTMessage.getSequence()) {
 				this.topologyMessages.put(id, newTMessage);
-				System.out.println("NEW \"Topology\":" + id);
+				System.out.println("UPDATE \"Topology\":" + id);
 				return true;
 			}
 		} else {
@@ -104,9 +104,7 @@ public class ManetNode {
 			System.out.println("NEW \"Topology\":" + id);
 			return true;
 		}
-
 		return false;
-
 	}
 
 	public void deleteTopology(Long id) {
@@ -124,8 +122,12 @@ public class ManetNode {
 	}
 
 	public Long getNextHop(Long target) {
+		if(neighbors.contains(target))
+			return target;
 		createRoutingTable();
-		return Long.parseLong(this.nextHopTable.get(target.toString()));
+		String nextHop = this.nextHopTable.get(target.toString());
+		System.out.println("Next hop:"+nextHop+"-"+Long.parseLong(nextHop));
+		return new Long(Long.parseLong(nextHop));
 	}
 
 	public void createRoutingTable() {
@@ -139,7 +141,7 @@ public class ManetNode {
 
 		DijkstraRoutingAlgorithm dijkstra = new DijkstraRoutingAlgorithm(this.id.toString(), graph);
 		this.nextHopTable = dijkstra.getNext_hop_table();
-		// dijkstra.printRountingTable();
+		dijkstra.printRountingTable();
 		dijkstra.printNextHopTable();
 	}
 
